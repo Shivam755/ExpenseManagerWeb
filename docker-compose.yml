@@ -1,0 +1,24 @@
+name: expense_manager
+
+services:
+  ui:
+    image: superslayer4/expense_manager_frontend:nuxt
+    container_name: expense_manager_frontend_nuxt
+    ports:
+      - "4000:4000"
+    depends_on:
+      - api
+  
+  api:
+    image: superslayer4/expense_manager_backend:nest
+    container_name: expense_manager_backend_nest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+  
+  db:
+    image: mongodb/mongodb-enterprise-server:7.0.0-ubi8
+    ports:
+      - "27017:27017"
+    container_name: expense_manger_db_mongo
